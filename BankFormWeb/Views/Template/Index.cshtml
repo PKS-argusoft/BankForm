@@ -1,0 +1,31 @@
+﻿@model List<Template>
+
+
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col" class = "col-2 pt-4 text-center">sl no</th>
+      <th scope="col" class = "col-3 text-center">Template Name</th>
+      <th scope="col" class = "col-2 text-center">Display order</th>
+      <th scope="col" class = "col-8 text-center">Settings</th>
+    </tr>
+  </thead>
+  <tbody>
+     <tr>
+       @{
+            int i = 1;
+        }
+        @foreach(var obj in Model)
+        {
+              <th scope="row" class = "col-2 text-center">@(i++)</th>
+              <td class = "col-2 text-center">@obj.TemplateName</td>
+              <td class = "col-3 text-center">@obj.Order</td>  
+              <td class = "col-2 text-center"><button type="button" class="btn ml-3 btn-primary">Edit</button>
+                                                <button type="button" class="btn ml-3 btn-danger">Delete</button>
+                                                <button type="button" class="btn ml-3 btn-success">Create Sections</button>
+              </td>
+        }
+    </tr>
+  </tbody>
+</table>
+
