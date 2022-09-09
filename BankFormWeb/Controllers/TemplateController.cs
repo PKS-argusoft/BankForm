@@ -1,5 +1,5 @@
-﻿using BankFormWeb.Data;
-using BankFormWeb.Models;
+﻿using BankForm.Models;
+using BankForm.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BankFormWeb.Controllers;
@@ -31,13 +31,19 @@ public class TemplateController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(Template obj)
     {
-        if(ModelState.IsValid)
+        var templateFromDbnCheck = _db.Templates.FirstOrDefault(x => x.TemplateName == obj.TemplateName);
+        if(templateFromDbnCheck == null)
         {
-            obj.CreatedAt = System.DateTime.Now;
-            _db.Templates.Add(obj);
-            _db.SaveChanges();
-            TempData["Success"] = obj.TemplateName + "is added successfully .";
-            return RedirectToAction("Index");
+
+            if(ModelState.IsValid)
+            {
+                obj.CreatedAt = System.DateTime.Now;
+                _db.Templates.Add(obj);
+                _db.SaveChanges();
+                TempData["Success"] = obj.TemplateName + "is added successfully .";
+                return RedirectToAction("Index");
+            }
+
         }
         return View(obj);
     }

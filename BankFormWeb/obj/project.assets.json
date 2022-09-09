@@ -3134,6 +3134,41 @@
         "runtime": {
           "lib/netstandard1.3/System.Xml.XDocument.dll": {}
         }
+      },
+      "BankForm.DataAccess/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "BankForm.Models": "1.0.0",
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.8",
+          "Microsoft.EntityFrameworkCore": "6.0.8",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.8",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.8",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.8"
+        },
+        "compile": {
+          "bin/placeholder/BankForm.DataAccess.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankForm.DataAccess.dll": {}
+        }
+      },
+      "BankForm.Models/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation": "6.0.8",
+          "Microsoft.EntityFrameworkCore": "6.0.8",
+          "Microsoft.EntityFrameworkCore.Relational": "6.0.8",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.8",
+          "Microsoft.VisualStudio.Web.CodeGeneration.Design": "6.0.8"
+        },
+        "compile": {
+          "bin/placeholder/BankForm.Models.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/BankForm.Models.dll": {}
+        }
       }
     }
   },
@@ -9650,12 +9685,24 @@
         "system.xml.xdocument.4.3.0.nupkg.sha512",
         "system.xml.xdocument.nuspec"
       ]
+    },
+    "BankForm.DataAccess/1.0.0": {
+      "type": "project",
+      "path": "../BankForm.DataAccess/BankForm.DataAccess.csproj",
+      "msbuildProject": "../BankForm.DataAccess/BankForm.DataAccess.csproj"
+    },
+    "BankForm.Models/1.0.0": {
+      "type": "project",
+      "path": "../BankForm.Models/BankForm.Models.csproj",
+      "msbuildProject": "../BankForm.Models/BankForm.Models.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net6.0": [
+      "BankForm.DataAccess >= 1.0.0",
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 6.0.8",
       "Microsoft.EntityFrameworkCore >= 6.0.8",
+      "Microsoft.EntityFrameworkCore.Relational >= 6.0.8",
       "Microsoft.EntityFrameworkCore.SqlServer >= 6.0.8",
       "Microsoft.EntityFrameworkCore.Tools >= 6.0.8",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 6.0.8"
@@ -9687,7 +9734,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "F:\\argu\\c#\\BankForm\\BankForm.DataAccess\\BankForm.DataAccess.csproj": {
+              "projectPath": "F:\\argu\\c#\\BankForm\\BankForm.DataAccess\\BankForm.DataAccess.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -9705,6 +9756,10 @@
             "version": "[6.0.8, )"
           },
           "Microsoft.EntityFrameworkCore": {
+            "target": "Package",
+            "version": "[6.0.8, )"
+          },
+          "Microsoft.EntityFrameworkCore.Relational": {
             "target": "Package",
             "version": "[6.0.8, )"
           },

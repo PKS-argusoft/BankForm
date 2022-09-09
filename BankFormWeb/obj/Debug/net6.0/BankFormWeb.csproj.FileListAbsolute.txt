@@ -550,4 +550,7 @@ F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\refs\WindowsBase.dll
 F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
 F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation.dll
 F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
-F:\argu\c#\BankForm\BankFormWeb\obj\Debug\net6.0\BankFormWeb.MvcApplicationPartsAssemblyInfo.cs
+F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.DataAccess.dll
+F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.Models.dll
+F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.DataAccess.pdb
+F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.Models.pdb
