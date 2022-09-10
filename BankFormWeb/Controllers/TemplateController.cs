@@ -1,21 +1,22 @@
 ﻿using BankForm.Models;
 using BankForm.DataAccess;
 using Microsoft.AspNetCore.Mvc;
+using BankForm.DataAccess.Repository.IRepository;
 
 namespace BankFormWeb.Controllers;
 
 public class TemplateController : Controller
 {
-    private readonly ApplicationDbContext _db;
+    private readonly IUnitOfWork _unitOfWork;
 
-    public TemplateController(ApplicationDbContext db)
+    public TemplateController(IUnitOfWork unitOfWork)
     {
-        _db = db;
+        _unitOfWork = unitOfWork;
     }
 
     public IActionResult Index()
     {
-        var objTemplateList = _db.Templates.ToList();
+        IEnumerable<Template> objTemplateList = _unitOfWork.Template.GetAll();
 
         return View(objTemplateList);
     }
@@ -31,15 +32,15 @@ public class TemplateController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(Template obj)
     {
-        var templateFromDbnCheck = _db.Templates.FirstOrDefault(x => x.TemplateName == obj.TemplateName);
+        var templateFromDbnCheck = _unitOfWork.Template.GetFirstOrDefault(x => x.TemplateName == obj.TemplateName);
         if(templateFromDbnCheck == null)
         {
 
             if(ModelState.IsValid)
             {
                 obj.CreatedAt = System.DateTime.Now;
-                _db.Templates.Add(obj);
-                _db.SaveChanges();
+                _unitOfWork.Template.Add(obj);
+                _unitOfWork.Save();
                 TempData["Success"] = obj.TemplateName + "is added successfully .";
                 return RedirectToAction("Index");
             }
@@ -55,7 +56,7 @@ public class TemplateController : Controller
         {
             return NotFound();
         }
-        var templateFromDb = _db.Templates.Find(id);
+        var templateFromDb = _unitOfWork.Template.GetFirstOrDefault(u=> u.TemplateId==id);
 
         if(templateFromDb == null)
         {
@@ -77,8 +78,8 @@ public class TemplateController : Controller
             obj.CreatedAt = obj.CreatedAt;
             obj.UpdatedAt = System.DateTime.Now;
 
-            _db.Templates.Update(obj);
-            _db.SaveChanges();
+            _unitOfWork.Template.Update(obj);
+            _unitOfWork.Save();
             TempData["Success"] = TempData["old_name_store"] + " has been edited to " + obj.TemplateName + " successfully . ";
             return RedirectToAction("Index");
 
@@ -94,7 +95,7 @@ public class TemplateController : Controller
         {
             return NotFound();
         }
-        var TemplateFromDb = _db.Templates.Find(id);
+        var TemplateFromDb = _unitOfWork.Template.GetFirstOrDefault(u => u.TemplateId == id);
         //var categoryFromDbFirst = _db.Categories.FirstOrDefault(u=>u.Id==id);
         //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u => u.Id == id);
 
@@ -111,14 +112,14 @@ public class TemplateController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult DeletePOST(int? id)
     {
-        var obj = _db.Templates.Find(id);
+        var obj = _unitOfWork.Template.GetFirstOrDefault(u => u.TemplateId == id);
         if (obj == null)
         {
             return NotFound();
         }
 
-        _db.Templates.Remove(obj);
-        _db.SaveChanges();
+        _unitOfWork.Template.Remove(obj);
+        _unitOfWork.Save();
         TempData["success"] = "Template deleted successfully";
         return RedirectToAction("Index");
 
