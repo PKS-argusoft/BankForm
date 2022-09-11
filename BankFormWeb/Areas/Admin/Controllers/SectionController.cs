@@ -1,6 +1,8 @@
-﻿using BankForm.DataAccess.Repository.IRepository;
+﻿using BankForm.DataAccess.Repository;
+using BankForm.DataAccess.Repository.IRepository;
 using BankForm.Models;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace BankFormWeb.Areas.Admin.Controllers;
 [Area("Admin")]
@@ -8,25 +10,28 @@ public class SectionController : Controller
 {
 
     private readonly IUnitOfWork _unitOfWork;
+
     public SectionController(IUnitOfWork unitOfWork)
     {
         _unitOfWork = unitOfWork;
 
     }
+
     public IActionResult Index(int Templateid)
     {
         SectionVM sectionVM = new()
         {
             TemplateId = Templateid,
-            SectionList = _unitOfWork.Section.GetAll()
-
+            SectionList = _unitOfWork.Section.GetAll().Where(u => u.FKTemplateId == Templateid)
         };
-            return View(sectionVM);
+
+        return View(sectionVM);
     }
 
     //GET
-    public IActionResult Create()
+    public IActionResult Create(int id)
     {
+        TempData["storeFKTemplate"] = id;
         return View();
     }
 
@@ -35,6 +40,7 @@ public class SectionController : Controller
     [ValidateAntiForgeryToken]
     public IActionResult Create(Section obj)
     {
+        
         var objNamevalid = _unitOfWork.Section.GetFirstOrDefault(u => u.SectionName == obj.SectionName);
         if (objNamevalid != null)
         {
@@ -43,10 +49,11 @@ public class SectionController : Controller
         }
         if (ModelState.IsValid)
         {
+            obj.FKTemplateId = Convert.ToInt32(TempData["storeFKTemplate"]);
             _unitOfWork.Section.Add(obj);
             _unitOfWork.Save();
             TempData["Success"] = obj.SectionName + " is added successfully .";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new {templateid= obj.FKTemplateId});
         }
 
         return View(obj);
@@ -67,6 +74,7 @@ public class SectionController : Controller
         {
             return NotFound();
         }
+        /*TempData["storeFKTemplateEdit"] = SectionObjFetch.FKTemplateId;*/
 
         TempData["SectionOldName"] = SectionObjFetch.SectionName;
         return View(SectionObjFetch);
@@ -79,10 +87,11 @@ public class SectionController : Controller
     {
         if (ModelState.IsValid)
         {
+            /*obj.FKTemplateId = Convert.ToInt32(TempData["storeFKTemplate"]);*/
             _unitOfWork.Section.Update(obj);
             _unitOfWork.Save();
             TempData["Success"] = TempData["SectionOldName"] + " changed to " + obj.SectionName + " .";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { templateid = obj.FKTemplateId });
         }
         return View(obj);
     }
@@ -110,6 +119,7 @@ public class SectionController : Controller
     public IActionResult DeletePOST(int? id)
     {
         var obj = _unitOfWork.Section.GetFirstOrDefault(u => u.SectionId == id);
+        var tempfkstore = obj.FKTemplateId;
         if (obj == null)
         {
             return NotFound();
@@ -118,7 +128,7 @@ public class SectionController : Controller
         _unitOfWork.Section.Remove(obj);
         _unitOfWork.Save();
         TempData["success"] = "Section deleted successfully";
-        return RedirectToAction("Index");
+        return RedirectToAction("Index", new { templateid = tempfkstore });
 
     }
 

@@ -27,7 +27,7 @@ public class Section
     public int UpdatedBy { get; set; } = -1;
 
     [Required]
-    public int FKTemplateId { get; set; } = 33;
+    public int FKTemplateId { get; set; } 
     [ForeignKey("FKTemplateId")]
     [ValidateNever]
     public Template Template { get; set; }

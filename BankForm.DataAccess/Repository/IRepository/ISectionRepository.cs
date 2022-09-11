@@ -10,5 +10,5 @@ namespace BankForm.DataAccess.Repository.IRepository;
 public interface ISectionRepository : IRepository<Section>
 {
     void Update(Section obj);
-
+    
 }

@@ -555,3 +555,4 @@ F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.Models.dll
 F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.DataAccess.pdb
 F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\BankForm.Models.pdb
 F:\argu\c#\BankForm\BankFormWeb\obj\Debug\net6.0\BankFormWeb.MvcApplicationPartsAssemblyInfo.cs
+F:\argu\c#\BankForm\BankFormWeb\bin\Debug\net6.0\linq2db.dll

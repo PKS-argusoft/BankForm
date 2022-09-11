@@ -1,6 +1,6 @@
 ﻿@model Section
 
-@*@Html.HiddenFor(m => m.TemplateId)*@
+@*@Html.HiddenFor(m => m.FKTemplateId, new{@Value = Model.FKTemplateId} )*@
 
 <form method="post" asp-action="Edit">
 	<div class="border p-3 mt-4">
@@ -11,6 +11,7 @@
 		@*<div asp-validation-summary="All"></div>*@
 		<input asp-for="SectionId"  type="hidden"   />
 		<input asp-for="CreatedAt"  type="hidden"   />
+		<input asp-for="FKTemplateId" type="hidden" >
 		<div class="mb-3">
 			<label asp-for="SectionName"></label>
 			<input asp-for="SectionName" class="form-control" />

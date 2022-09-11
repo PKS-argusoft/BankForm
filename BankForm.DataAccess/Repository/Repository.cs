@@ -43,6 +43,8 @@ namespace BankForm.DataAccess.Repository
             
         }
 
+       
+
         public void Remove(T entity)
         {
             dbset.Remove(entity);

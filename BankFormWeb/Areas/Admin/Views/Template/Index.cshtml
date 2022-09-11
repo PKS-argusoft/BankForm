@@ -27,7 +27,7 @@
               <td class = "col-2 text-center">
                    <a  class="btn ml-3 btn-primary" asp-controller="Template" asp-action="Edit" asp-route-id="@obj.TemplateId">Edit</a>
                    <a  class="btn ml-3 btn-danger" asp-controller="Template" asp-action="Delete" asp-route-id="@obj.TemplateId">Delete</a>
-                   <a  class="btn ml-3 btn-success" asp-controller="Section" asp-action="Create" asp-route-id="@obj.TemplateId">Create Sections</a>
+                   <a  class="btn ml-3 btn-success" asp-controller="Section" asp-action="Index" asp-route-templateid="@obj.TemplateId">Create Sections</a>
               </td>
         
             </tr>
@@ -35,4 +35,3 @@
     
   </tbody>
 </table>
-
