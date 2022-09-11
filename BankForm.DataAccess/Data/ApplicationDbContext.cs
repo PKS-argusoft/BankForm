@@ -12,5 +12,6 @@ public class ApplicationDbContext:DbContext
     }
 
     public DbSet<Template>  Templates { get; set; }
+    public DbSet<Section> Sections { get; set; }
 
 }

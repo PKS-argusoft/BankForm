@@ -9,6 +9,7 @@ namespace BankForm.DataAccess.Repository.IRepository;
 public interface IUnitOfWork 
 {
     ITemplateRepository Template { get; }
+    ISectionRepository Section { get; }
 
     void Save();
 

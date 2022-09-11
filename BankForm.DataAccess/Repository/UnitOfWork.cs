@@ -15,9 +15,11 @@ public class UnitOfWork : IUnitOfWork
     {
         _db = db;
         Template = new TemplateRepository(_db);
+        Section = new SectionRepository(_db);
     }
     public ITemplateRepository Template { get; private set; } 
 
+    public ISectionRepository Section { get; private set; }
     public void Save()
     {
         _db.SaveChanges();

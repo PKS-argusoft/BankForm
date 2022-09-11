@@ -3,8 +3,8 @@ using BankForm.DataAccess;
 using Microsoft.AspNetCore.Mvc;
 using BankForm.DataAccess.Repository.IRepository;
 
-namespace BankFormWeb.Controllers;
-
+namespace BankFormWeb.Areas.Admin.Controllers;
+[Area("Admin")]
 public class TemplateController : Controller
 {
     private readonly IUnitOfWork _unitOfWork;
@@ -33,15 +33,15 @@ public class TemplateController : Controller
     public IActionResult Create(Template obj)
     {
         var templateFromDbnCheck = _unitOfWork.Template.GetFirstOrDefault(x => x.TemplateName == obj.TemplateName);
-        if(templateFromDbnCheck == null)
+        if (templateFromDbnCheck == null)
         {
 
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
-                obj.CreatedAt = System.DateTime.Now;
+                obj.CreatedAt = DateTime.Now;
                 _unitOfWork.Template.Add(obj);
                 _unitOfWork.Save();
-                TempData["Success"] = obj.TemplateName + "is added successfully .";
+                TempData["Success"] = obj.TemplateName + " is added successfully .";
                 return RedirectToAction("Index");
             }
 
@@ -50,15 +50,15 @@ public class TemplateController : Controller
     }
 
     //get
-    public IActionResult Edit(int? id )
+    public IActionResult Edit(int? id)
     {
-        if(id == null || id==0)
+        if (id == null || id == 0)
         {
             return NotFound();
         }
-        var templateFromDb = _unitOfWork.Template.GetFirstOrDefault(u=> u.TemplateId==id);
+        var templateFromDb = _unitOfWork.Template.GetFirstOrDefault(u => u.TemplateId == id);
 
-        if(templateFromDb == null)
+        if (templateFromDb == null)
         {
             return NotFound();
         }
@@ -76,7 +76,7 @@ public class TemplateController : Controller
         if (ModelState.IsValid)
         {
             obj.CreatedAt = obj.CreatedAt;
-            obj.UpdatedAt = System.DateTime.Now;
+            obj.UpdatedAt = DateTime.Now;
 
             _unitOfWork.Template.Update(obj);
             _unitOfWork.Save();
